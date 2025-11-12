@@ -31,6 +31,22 @@
 #include <iomanip>
 #include <algorithm>
 
+// Undefine Windows API macros that conflict with method names
+#ifdef _WIN32
+#ifdef CreateDirectory
+#undef CreateDirectory
+#endif
+#ifdef GetObject
+#undef GetObject
+#endif
+#ifdef max
+#undef max
+#endif
+#ifdef min
+#undef min
+#endif
+#endif
+
 namespace mtp
 {
 

@@ -27,6 +27,10 @@
 #	include <magic.h>
 #endif
 
+
+#ifdef _WIN32
+#include <compat.h>
+#endif
 namespace mtp
 {
 	namespace

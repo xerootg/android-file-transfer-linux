@@ -24,6 +24,7 @@
 #include <mtp/ptp/Container.h>
 #include <mtp/ptp/OutputStream.h>
 #include <mtp/ptp/OperationCode.h>
+#include <iterator>
 
 namespace mtp
 {
