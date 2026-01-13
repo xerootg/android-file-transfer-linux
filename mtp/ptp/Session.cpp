@@ -239,7 +239,7 @@ namespace mtp
 			} else
 				_packeter.Write(std::make_shared<JoinedObjectInputStream>(std::make_shared<ByteArrayObjectInputStream>(container.Data), inputStream), timeout);
 		}
-		return Get(transaction.Id, response);
+		return Get(transaction.Id, response, timeout);
 	}
 
 	msg::DeviceInfo Session::GetDeviceInfo(PipePacketer& packeter, u32 transactionId, int timeout)
@@ -876,7 +876,7 @@ namespace mtp
 	{ RunTransaction(_defaultTimeout, (OperationCode)0x9215); }
 
 	ByteArray Session::GetWiFiNetworkList()
-	{ return RunTransaction(_defaultTimeout, (OperationCode)0x9225); }
+	{ return RunTransaction(20000, (OperationCode)0x9225); }  // 60 second timeout for WiFi scanning
 
 	void Session::SetWiFiConfiguration(const ByteArray &configData)
 	{
