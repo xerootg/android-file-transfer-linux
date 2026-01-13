@@ -203,6 +203,8 @@ else()
 		mtp/backend/linux/usb/Device.cpp
 		mtp/backend/linux/usb/Interface.cpp
 		mtp/backend/linux/usb/DeviceDescriptor.cpp
+		mtp/backend/posix/FileHandler.cpp
+		mtp/backend/posix/Exception.cpp
 	)
 endif()
 
