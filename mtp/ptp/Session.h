@@ -172,6 +172,7 @@ namespace mtp
 	ByteArray Operation9224();  // Pre-WiFi preparation (no parameters, returns data)
 	void Operation9226();  // Unknown operation called before GUID operations
 	void Operation9228(u32 param);  // Post-WiFi operation (0, 2, 2, 2)
+	u32 TestWiFiConfiguration(u32 action);  // 0x9228 with response - returns status code
 	void Operation9215();  // Unknown operation
 	void Operation9219(u32 param1, u32 param2, u32 param3);  // Parameters: 0, 0, 5000
 	ByteArray Operation922f(const ByteArray &data);  // Receives data from device (data param ignored), returns data

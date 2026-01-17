@@ -761,6 +761,26 @@ namespace mtp
 	void Session::Operation9228(u32 param)
 	{ RunTransaction(_defaultTimeout, (OperationCode)0x9228, param); }
 
+	u32 Session::TestWiFiConfiguration(u32 action)
+	{
+		// Operation 0x9228 (TEST_WLAN_CONFIGURATION)
+		// Actions: 0=START, 1=CANCEL, 2=GET_STATUS
+		// Response param[0]: 0=SUCCESS, 1=RUNNING, 2=NO_CONFIG, 3=FAIL_ASSOCIATE, 4=FAIL_DHCP
+		scoped_mutex_lock l(_mutex);
+		Transaction transaction(this);
+		Send(OperationRequest((OperationCode)0x9228, transaction.Id, action));
+		ByteArray data, response;
+		ResponseType responseCode;
+		_packeter.Read(transaction.Id, data, responseCode, response, _defaultTimeout);
+		CHECK_RESPONSE(responseCode);
+		
+		// Response parameters are in little-endian format
+		if (response.size() >= 4) {
+			return response[0] | (response[1] << 8) | (response[2] << 16) | (response[3] << 24);
+		}
+		return 0xFFFFFFFF;  // Unknown error
+	}
+
 	void Session::Operation9219(u32 param1, u32 param2, u32 param3)
 	{
 		// Operation 0x9219 with 3 parameters
